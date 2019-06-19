@@ -30,7 +30,7 @@ resource "azurerm_policy_definition" "AddDefaultOOHShutdownTag" {
 resource "azurerm_policy_assignment" "DefaultShutdownTag" {
   name                 = "DefaultShutdownTag-policy-assignment"
   scope                = "${data.azurerm_subscription.current.id}"
-  policy_definition_id = "${azurerm_policy_definition.AddDefaultOOHShutdownTag.id}"
+  policy_definition_id = "${azurerm_policy_definition.AddDefaultOOHShutdownTag[0].id}"
   description          = "DefaultShutdownTag"
   display_name         = "DefaultShutdownTag Policy Assignment"
 }
@@ -81,7 +81,7 @@ resource "azurerm_policy_definition" "EnforceOOHsShutdownTagValue" {
 resource "azurerm_policy_assignment" "EnforceShutdownTag" {
   name                 = "EnforceShutdownTag-policy-assignment"
   scope                = "${data.azurerm_subscription.current.id}"
-  policy_definition_id = "${azurerm_policy_definition.AddDefaultOOHShutdownTag.id}"
+  policy_definition_id = "${azurerm_policy_definition.EnforceShutdownTag[0].id}"
   description          = "EnforceShutdownTag"
   display_name         = "EnforceShutdownTag Policy Assignment"
 }
