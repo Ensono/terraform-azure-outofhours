@@ -59,7 +59,15 @@ resource "azurerm_policy_definition" "EnforceOOHsShutdownTagValue" {
         }
     }
     POLICY_RULE
-  parameters = <<PARAMETERS
+  }
+
+resource "azurerm_policy_assignment" "EnforceShutdownTag" {
+  name                 = "EnforceShutdownTag-policy-assignment"
+  scope                = "${data.azurerm_subscription.current.id}"
+  policy_definition_id = "${azurerm_policy_definition.EnforceOOHsShutdownTagValue[0].id}"
+  description          = "EnforceShutdownTag"
+  display_name         = "EnforceShutdownTag Policy Assignment"
+    parameters = <<PARAMETERS
     {
     "allowedOOHTags": {
       "type": "Array",
@@ -76,12 +84,4 @@ resource "azurerm_policy_definition" "EnforceOOHsShutdownTagValue" {
         }
     }
     PARAMETERS
-  }
-
-resource "azurerm_policy_assignment" "EnforceShutdownTag" {
-  name                 = "EnforceShutdownTag-policy-assignment"
-  scope                = "${data.azurerm_subscription.current.id}"
-  policy_definition_id = "${azurerm_policy_definition.EnforceOOHsShutdownTagValue[0].id}"
-  description          = "EnforceShutdownTag"
-  display_name         = "EnforceShutdownTag Policy Assignment"
 }
