@@ -44,7 +44,7 @@ resource "azurerm_policy_definition" "EnforceProperDefaultOOHsShutdownTagValue" 
             ]
         },
         "then": {
-            "effect": "deny",
+            "effect": "deny"
         }
     }
     POLICY_RULE
@@ -63,8 +63,7 @@ parameters = <<PARAMETERS
             "delete",
             "donothing"
         ]
+        }
     }
+    PARAMETERS
   }
-PARAMETERS
-  }
-
