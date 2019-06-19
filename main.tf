@@ -53,7 +53,7 @@ resource "azurerm_policy_definition" "EnforceOOHsShutdownTagValue" {
       "type": "Array",
         "metadata": {
             "description": "The list of allowed values for for outofhours tag.",
-            "displayName": "Allowed OutofHours Tag values",
+            "displayName": "Allowed OutofHours Tag values"
         },
         "allowedValues": [
             "shutdown",
