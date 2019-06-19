@@ -24,13 +24,12 @@ resource "azurerm_policy_definition" "AddDefaultOOHShutdownTag" {
     POLICY_RULE
   }
 
-resource "azurerm_policy_definition" "EnforceProperDefaultOOHsShutdownTagValue" {
+resource "azurerm_policy_definition" "EnforceOOHsShutdownTagValue" {
   count        = "${var.create_resource ? 1 : 0 }"
-  name         = "DefaultShutdownTag"
+  name         = "EnforceShutdownTag"
   policy_type  = "Custom"
   mode         = "Indexed"
-  display_name = "DefaultShutdownTag policy definition"
-
+  display_name = "EnforceShutdownTag policy definition"
   policy_rule = <<POLICY_RULE
     {
         "if": {
@@ -48,8 +47,7 @@ resource "azurerm_policy_definition" "EnforceProperDefaultOOHsShutdownTagValue" 
         }
     }
     POLICY_RULE
-  
-parameters = <<PARAMETERS
+  parameters = <<PARAMETERS
     {
     "allowedOOHTags": {
       "type": "Array",
