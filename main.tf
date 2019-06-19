@@ -50,7 +50,12 @@ resource "azurerm_policy_definition" "EnforceOOHsShutdownTagValue" {
                  "exists": "true"
             },
             {"field": "tags['outofhours']",
-             "notIn": "[parameters('allowedOOHTags')]"
+             "notIn": [
+              "shutdown",
+              "scaledown",
+              "delete",
+              "donothing"
+              ]
             }
             ]
         },
@@ -67,21 +72,4 @@ resource "azurerm_policy_assignment" "EnforceShutdownTag" {
   policy_definition_id = "${azurerm_policy_definition.EnforceOOHsShutdownTagValue[0].id}"
   description          = "EnforceShutdownTag"
   display_name         = "EnforceShutdownTag Policy Assignment"
-    parameters = <<PARAMETERS
-    {
-    "allowedOOHTags": {
-      "type": "Array",
-        "metadata": {
-            "description": "The list of allowed values for for outofhours tag.",
-            "displayName": "Allowed OutofHours Tag values"
-        },
-        "allowedValues": [
-            "shutdown",
-            "scaledown",
-            "delete",
-            "donothing"
-        ]
-        }
-    }
-    PARAMETERS
 }
