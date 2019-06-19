@@ -7,3 +7,6 @@
 
 # .tfvars files
 *.tfvars
+!Release.tfvars
+
+.DS_Store
