@@ -1,3 +1,6 @@
+data "azurerm_subscription" "current" {}
+
+
 resource "azurerm_policy_definition" "AddDefaultOOHShutdownTag" {
   count        = "${var.create_resource ? 1 : 0 }"
   name         = "DefaultShutdownTag"
@@ -23,6 +26,15 @@ resource "azurerm_policy_definition" "AddDefaultOOHShutdownTag" {
     }
     POLICY_RULE
   }
+
+resource "azurerm_policy_assignment" "DefaultShutdownTag" {
+  name                 = "DefaultShutdownTag-policy-assignment"
+  scope                = "${data.azurerm_subscription.current.id}"
+  policy_definition_id = "${azurerm_policy_definition.AddDefaultOOHShutdownTag.id}"
+  description          = "DefaultShutdownTag"
+  display_name         = "DefaultShutdownTag Policy Assignment"
+}
+
 
 resource "azurerm_policy_definition" "EnforceOOHsShutdownTagValue" {
   count        = "${var.create_resource ? 1 : 0 }"
@@ -65,3 +77,11 @@ resource "azurerm_policy_definition" "EnforceOOHsShutdownTagValue" {
     }
     PARAMETERS
   }
+
+resource "azurerm_policy_assignment" "EnforceShutdownTag" {
+  name                 = "EnforceShutdownTag-policy-assignment"
+  scope                = "${data.azurerm_subscription.current.id}"
+  policy_definition_id = "${azurerm_policy_definition.AddDefaultOOHShutdownTag.id}"
+  description          = "EnforceShutdownTag"
+  display_name         = "EnforceShutdownTag Policy Assignment"
+}
