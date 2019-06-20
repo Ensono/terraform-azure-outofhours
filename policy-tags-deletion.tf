@@ -1,5 +1,5 @@
 resource "azurerm_policy_definition" "AddDefaultDeletionTag" {
-  count        = "${var.create_resource && add_deletion_tags ? 1 : 0 }"
+  count        = "${var.create_resource && var.add_deletion_tags ? 1 : 0 }"
   name         = "DefaultDeletionTag"
   policy_type  = "Custom"
   mode         = "Indexed"
