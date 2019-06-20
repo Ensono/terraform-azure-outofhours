@@ -12,6 +12,10 @@ variable "add_deletion_tags" {
   type = bool
 }
 
+variable "tags_deletion_enable_default_life" {
+  default = false
+  type = bool
+}
 
 variable "tags_deletion_default_life_in_days" {
   default = 30

@@ -16,14 +16,13 @@ resource "azurerm_policy_definition" "AddDefaultDeletionTag" {
             "details": [
                 {
                     "field": "tags['deletiondate']",
-                    "value": "[addDays(utcNow(), ${var.tags_deletion_default_life_in_days})]"
+                    "value": "${var.tags_deletion_enable_default_life ? "[addDays(utcNow(), ${var.tags_deletion_default_life_in_days})]": "do-not-delete" }"
                 }
             ]
         }
     }
     POLICY_RULE
   }
-
 
 resource "azurerm_policy_assignment" "DefaultDeletionTag" {
   name                 = "DefaultDeletionTag-policy-assignment"
