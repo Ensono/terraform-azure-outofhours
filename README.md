@@ -1,38 +1,24 @@
-# Amido Azure ACR  Terraform module
+# Amido Azure Out of Hours  Terraform module
 
-
-Terraform module which creates an Azure Container Registry with supporting resources in Azure.
+Terraform module which creates a tagging policy for Microsoft Azure resources pegged to the current subscription for consumption by Azure Automation/reporting functions for cost saving and auditing purposes.
 
 ## Example Usage
 
 ```hcl
-module "aks-registry" {
-  source = "git::https://github.com/amido/terraform-azure-acr.git"
+module "azure-outofhours" {
+  source = "git::https://github.com/amido/terraform-azure-outofhours.git"
   resource_group_name     = "${var.resource_group_name}"
   resource_group_location = "${var.resource_group_location}"
-}
-```
-
-If you are using classic container registry SKUs, you will need to set the following values:
-
-```hcl
-module "aks-registry" {
-  source = "git::https://github.com/amido/terraform-azure-acr.git"
-  resource_group_name     = "${var.resource_group_name}"
-  resource_group_location = "${var.resource_group_location}"
-  registry_sku            = "classic"
-  registry_sku_is_classic = true
 }
 ```
 ## Provisioning Result
 
-Without any variables, this module will provision a standard Azure Container Registry in West Europe, returning the login server and primary administrative key as outputs.
 
 TODO: Parameterise admin user creation and outputs
 
 ## Terraform version
 
-This has been tested in AzureRM provider version 1.9.0 and Terraform 0.11.7
+This has been tested in AzureRM provider version 1.30.0 and Terraform 0.12
 
 ## Examples
 
