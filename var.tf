@@ -7,6 +7,32 @@ variable "create_resource" {
   type = bool
 }
 
-#variable "deletion_date" {
-#  default = formatdate("yyyy-MM-ddTHH:mm:ss.fffffffZ",timestamp())
-#}
+variable "add_deletion_tags" {
+  default = true
+  type = bool
+}
+
+
+variable "tags_deletion_default_life_in_days" {
+  default = 30
+}
+
+variable "add_ooh_tags" {
+  default = true
+  type = bool
+}
+
+
+variable "tags_ooh_permitted_shutdown_values" {
+  type    = "list"
+  default = [
+              "shutdown",
+              "scaledown",
+              "delete",
+              "donothing"
+              ]
+}
+
+variable "tags_ooh_default_shutdown_value" {
+  default = "donothing"
+}

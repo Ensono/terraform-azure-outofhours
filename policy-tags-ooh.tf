@@ -1,5 +1,5 @@
 resource "azurerm_policy_definition" "AddDefaultOOHShutdownTag" {
-  count        = "${var.create_resource ? 1 : 0 }"
+  count        = "${var.create_resource && var.add_ooh_tags? 1 : 0 }"
   name         = "DefaultShutdownTag"
   policy_type  = "Custom"
   mode         = "Indexed"
@@ -16,7 +16,7 @@ resource "azurerm_policy_definition" "AddDefaultOOHShutdownTag" {
             "details": [
                 {
                     "field": "tags['outofhours']",
-                    "value": "shutdown"
+                    "value": ${var.tags_ooh_default_shutdown_value}
                 }
             ]
         }
@@ -47,12 +47,7 @@ resource "azurerm_policy_definition" "EnforceOOHsShutdownTagValue" {
                  "exists": "true"
             },
             {"field": "tags['outofhours']",
-             "notIn": [
-              "shutdown",
-              "scaledown",
-              "delete",
-              "donothing"
-              ]
+             "notIn": ${var.tags_ooh_permitted_shutdown_values}
             }
             ]
         },

@@ -1,5 +1,5 @@
 resource "azurerm_policy_definition" "AddDefaultDeletionTag" {
-  count        = "${var.create_resource ? 1 : 0 }"
+  count        = "${var.create_resource && add_deletion_tags ? 1 : 0 }"
   name         = "DefaultDeletionTag"
   policy_type  = "Custom"
   mode         = "Indexed"
@@ -16,7 +16,7 @@ resource "azurerm_policy_definition" "AddDefaultDeletionTag" {
             "details": [
                 {
                     "field": "tags['deletiondate']",
-                    "value": "[addDays(utcNow(), 90)]"
+                    "value": "[addDays(utcNow(), ${var.tags_deletion_default_life_in_days})]"
                 }
             ]
         }
