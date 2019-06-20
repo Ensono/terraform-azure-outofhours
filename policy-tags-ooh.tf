@@ -16,7 +16,7 @@ resource "azurerm_policy_definition" "AddDefaultOOHShutdownTag" {
             "details": [
                 {
                     "field": "tags['outofhours']",
-                    "value": ${var.tags_ooh_default_shutdown_value}
+                    "value": "${var.tags_ooh_default_shutdown_value}"
                 }
             ]
         }
