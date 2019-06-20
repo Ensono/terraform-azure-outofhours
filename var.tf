@@ -22,15 +22,8 @@ variable "add_ooh_tags" {
   type = bool
 }
 
-
 variable "tags_ooh_permitted_shutdown_values" {
-  type    = "list"
-  default = [
-              "shutdown",
-              "scaledown",
-              "delete",
-              "donothing"
-              ]
+  default = "[ \"shutdown\", \"scaledown\",\"delete\",\"donothing\", \"audit\"]"
 }
 
 variable "tags_ooh_default_shutdown_value" {
