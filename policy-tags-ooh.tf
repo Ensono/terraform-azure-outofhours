@@ -58,7 +58,8 @@ resource "azurerm_policy_definition" "EnforceOOHsShutdownTagValue" {
     POLICY_RULE
   }
 
-resource "azurerm_policy_assignment" "EnforceShutdownTag" {
+resource "azurerm_policy_assignment" "EnforceShutdownTagSubscription" {
+  count                = "${var.tags_apply_to_subscription ? 1 : 0}"
   name                 = "EnforceShutdownTag-policy-assignment"
   scope                = "${data.azurerm_subscription.current.id}"
   policy_definition_id = "${azurerm_policy_definition.EnforceOOHsShutdownTagValue[0].id}"

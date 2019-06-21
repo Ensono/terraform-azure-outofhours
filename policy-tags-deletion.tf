@@ -24,7 +24,8 @@ resource "azurerm_policy_definition" "AddDefaultDeletionTag" {
     POLICY_RULE
   }
 
-resource "azurerm_policy_assignment" "DefaultDeletionTag" {
+resource "azurerm_policy_assignment" "DefaultDeletionTagSubscription" {
+  count                = "${var.tags_apply_to_subscription ? 1 : 0}"
   name                 = "DefaultDeletionTag-policy-assignment"
   scope                = "${data.azurerm_subscription.current.id}"
   policy_definition_id = "${azurerm_policy_definition.AddDefaultDeletionTag[0].id}"
