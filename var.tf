@@ -26,6 +26,16 @@ variable "add_ooh_tags" {
   type = bool
 }
 
+variable "tags_apply_to_subscription" {
+  default = true
+  type = bool
+}
+
+variable "tags_apply_to_rgs" {
+  type = list
+  default = []
+}
+
 variable "tags_ooh_permitted_shutdown_values" {
   default = "[ \"shutdown\", \"scaledown\",\"delete\",\"donothing\", \"audit\"]"
 }
